@@ -33,6 +33,16 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::controller(\App\Http\Controllers\PromptController::class)->group(function () {
+        Route::get('/prompt', 'index')->name('prompt');
+        Route::get('/prompt/create', 'create')->name('prompt.create');
+        Route::post('/prompt', 'store')->name('prompt.store');
+        Route::get('/prompt/{prompt}/edit', 'edit')->name('prompt.edit');
+        Route::put('/prompt/{prompt}', 'update')->name('prompt.update');
+        Route::delete('/prompt/{prompt}', 'destroy')->name('prompt.destroy');
+    });
+
 });
 
 require __DIR__.'/auth.php';
