@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Prompt;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class PromptController extends Controller
@@ -23,7 +24,7 @@ class PromptController extends Controller
 
     public function create()
     {
-        return Inertia::render('Prompts/Create');
+        return Inertia::render('Prompt/Create');
     }
 
     public function store(Request $request)
@@ -41,9 +42,25 @@ class PromptController extends Controller
         }
     }
 
+    public function perform(Prompt $prompt)
+    {
+        return Inertia::render('Prompt/Perform', [
+            'prompt' => $prompt,
+        ]);
+    }
+
+    public function execute(Prompt $prompt, Request $request)
+    {
+        try {
+            return DB::connection('honeypot')->select($request->get('query'));
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+
     public function edit(Prompt $prompt)
     {
-        return Inertia::render('Prompts/Edit', [
+        return Inertia::render('Prompt/Edit', [
             'prompt' => $prompt,
         ]);
     }

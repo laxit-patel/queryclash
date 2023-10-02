@@ -41,6 +41,8 @@ Route::middleware('auth')->group(function () {
         Route::get('/prompt/{prompt}/edit', 'edit')->name('prompt.edit');
         Route::put('/prompt/{prompt}', 'update')->name('prompt.update');
         Route::delete('/prompt/{prompt}', 'destroy')->name('prompt.destroy');
+        Route::get('/prompt/{prompt}/perform', 'perform')->name('prompt.perform');
+        Route::post('/prompt/{prompt}/execute', 'execute')->name('prompt.execute');
     });
 
 });

@@ -63,6 +63,16 @@ return [
             ]) : [],
         ],
 
+        'honeypot' => [
+            'driver' => 'mysql',
+            'url' => env('DATABASE_URL'),
+            'host' => env('HONEYPOT_DB_HOST', '127.0.0.1'),
+            'port' => env('HONEYPOT_DB_PORT', '3306'),
+            'database' => env('HONEYPOT_DB_DATABASE', 'honeypot'),
+            'username' => env('HONEYPOT_DB_USERNAME', 'forge'),
+            'password' => env('HONEYPOT_DB_PASSWORD', ''),
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),
